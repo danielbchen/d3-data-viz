@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- set styles on the top -->
+    <style>
+        .chart-container {
+            max-width: 1000px;
+            /* border: 2px solid red; */
+            margin: 0 auto;
+            /* auto centers the div */
+
+            font-family: sans-serif;
+
+        }
+
+        svg {
+            /* border: 2px solid purple; */
+            overflow: visible;
+        }
+
+
+        h1 {
+            border: 2px solid green;
+        }
+
+        .x .tick line {
+            stroke: rgba(0, 0, 0, .2);
+        }
+
+        .y .tick line {
+            stroke: rgba(0, 0, 0, .2);
+        }
+
+        .x .domain {
+            display: none;
+        }
+
+        .y .domain {
+            display: none;
+        }
+
+        .y .tick text {
+            font-size: 14px;
+            fill: #333;
+        }
+
+        .x .tick text {
+            font-size: 14px;
+            fill: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chart-container">
+        <h2 class="headline">
+            The wealth of a district tells us little about the effectiveness of its schools.
+        </h2>
+
+        <p style="width:85%;text-align:left;margin-left:0;color:rgb(75, 74, 74)">
+            In Chicago Public Schools System, three in four children come from low-income homes,
+            but the data shows that in a five-year span, 
+            students receive the equivalent of six years of education, measured by the change in 
+            test scores between third and eigth grade.
+        </p>
+
+        <svg width="1100px" height="1050px">
+        </svg>
+    </div>
+</body>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<!-- we're using d3 version 6 (the latest version) for all out work -->
+
+<script>
+
+    console.log({ d3 })
+
+    let width = 800;
+    let height = 500;
+
+    let svg = d3.select("body")
+        .select("svg")
+
+    console.log(svg.node())
+
+    d3.tsv("largest_districts.tsv", d3.autoType).then(function (data) {
+
+        // Add new "column" that is the difference between scores in 8th 
+        // grade and scores in 3rd grade
+        data.forEach(function (d) {
+            d.diff = d.mnav8poolgcs - d.mnav3poolgcs
+        })
+
+        // Observation has NaN value for socioeconomic status
+        data = data.filter(function (row) {
+            return row.newname != "North Colonie CSD"
+        })
+
+
+        console.log(data) 
+
+
+        let margin = { top: 20, right: 50, bottom: 10, left: 30 };
+
+
+        let x = d3.scaleLinear()
+            .domain(d3.extent(data.map(function (d) { return d.ses }))) 
+            .range([margin.left, width - margin.right])
+
+
+        let y = d3.scaleLinear()
+            .domain(d3.extent(data.map(function (d) { return d.diff })))
+            .range([height - margin.bottom, margin.top])
+
+
+        // Only setting a y-axis
+        let yAxisSettings = d3.axisLeft(y) 
+            .ticks(5)
+            .tickSize(-width -50) //size of tick lines
+            .tickFormat("") // Remove tick labels entirely
+            .tickPadding(-825) 
+
+
+        let yAxisTicks = svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxisSettings)
+            //.attr("transform", `translate(${margin.left},0)`)
+
+
+        let points = svg.append("g") 
+            .selectAll(".points") 
+            .data(data) 
+            .join("circle") 
+            .attr("class", function (d) {
+                return "points" + d.newname
+            }) 
+            .attr("cx", function (d) { return x(d.ses) }) 
+            .attr("cy", function (d) { return y(d.diff) })  
+            .attr("r", function (d) { return Math.sqrt(d.totavg) / 6 }) // Allow circles to be different sizes
+            .attr("opacity", d => {
+                if(d.newname == "City of Chicago" | d.newname == "Milwaukee School District" | d.newname == "Anne Arundel County Public Schools") {
+                    return 1
+                } else {
+                    return .35
+                }
+            })
+            .style("fill", d => {
+                if(d.newname == "City of Chicago" | d.newname == "Milwaukee School District" | d.newname == "Anne Arundel County Public Schools") {
+                    return "#F7D725"
+                } else {
+                    return "#BFC8D6"
+                }
+
+            })
+            .style("stroke", "black")
+            .style("stroke-width", d => {
+                if(d.newname == "City of Chicago" | d.newname == "Milwaukee School District" | d.newname == "Anne Arundel County Public Schools") {
+                    return 2
+                } else {
+                    1.2
+                }
+            })
+
+
+        let baseline = svg.append("line") 
+            .attr("x1", margin.left - 30)
+            .attr("x2", width + 50)
+            .attr("y1", y(5))
+            .attr("y2", y(5))
+            .style("stroke", "#333")
+            .style("stroke-width", "1.5")
+
+
+        let richlabel = svg.append("text")
+            .attr("x", width - margin.left + 80)
+            .attr("y", height - margin.bottom + 40)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "#666")
+            .text("Richer Districts →")
+        
+
+        let poorlabel = svg.append("text")
+            .attr("x", width - margin.right - 620)
+            .attr("y", height - margin.bottom + 40)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "#666")
+            .text("← Poorer Districts")
+
+
+        let six = svg.append("text")
+            .attr("x", width - margin.left + 80)
+            .attr("y", height - 420)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "#9c9c9c")
+            .style("font-size", "15px")
+            .text("6 yrs.")
+
+
+        let five = svg.append("text")
+            .attr("x", width - margin.left + 80)
+            .attr("y", height - 325)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "black")
+            .style("font-size", "15px")
+            .style("font-weight", "bold")
+            .text("Avg. = 5 yrs.")
+
+
+        let four = svg.append("text")
+            .attr("x", width - margin.left + 80)
+            .attr("y", height - 225)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "#9c9c9c")
+            .style("font-size", "15px")
+            .text("4 yrs.")
+
+
+        let three = svg.append("text")
+            .attr("x", width - margin.left + 80)
+            .attr("y", height - 130)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "#9c9c9c")
+            .style("font-size", "15px")
+            .text("3 yrs.")
+
+        let two = svg.append("text")
+            .attr("x", width - margin.left + 80)
+            .attr("y", height - 35)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "#9c9c9c")
+            .style("font-size", "15px")
+            .text("2 yrs.")
+
+
+        let chicago = svg.append("text")
+            .attr("x", width - margin.left - 510)
+            .attr("y", height - 442)
+            .style("font-weight", "bold")
+            .style("font-family", "sans-serif")
+            .style("font-size", "16px")
+            .text("Chicago")
+        
+        let milwaukee = svg.append("text")
+            .attr("x", width - margin.left - 585)
+            .attr("y", height - 292)
+            .style("font-weight", "bold")
+            .style("font-family", "sans-serif")
+            .style("font-size", "16px")
+            .text("Milwaukee")
+
+
+        let aac = svg.append("text")
+            .attr("x", width - margin.left - 300)
+            .attr("y", height - 248)
+            .attr("class", "shadow")
+            .style("font-weight", "bold")
+            .style("font-family", "sans-serif")
+            .style("font-size", "16px")
+            .style("stroke", "FFFFFF")
+            .style("stroke-width", .33)
+            .style("fill", "#000000")
+            .text("Anne Arundel County")
+
+        let circlesize = svg.append("text")
+            .attr("x", width - margin.right - 750)
+            .attr("y", margin.top + 5)
+            .style("font-family", "sans-serif")
+            .style("fill", "#9c9c9c")
+            .style("font-size", "15px")
+            .style("font-style", "italic")
+            .text("Larger circles represent districts with more students.")
+
+        let source = svg.append("text")
+            .attr("x", width - margin.left + 80)
+            .attr("y", height - margin.bottom + 90)
+            .style("text-anchor", "end")
+            .style("font-family", "sans-serif")
+            .style("fill", "#666")
+            .style("font-size", "14px")
+            .style("font-style", "italic")
+            .text("Data is from New York Times and Educational Opportunity Project at Stanford University for the 2,000 largest school districts in the U.S.")
+
+    })
+
+
+</script>
