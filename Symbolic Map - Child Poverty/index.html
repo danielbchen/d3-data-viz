@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .chart-container {
+            max-width: 1050px;
+            margin: 0 auto;
+            /* auto centers the div */
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        svg {
+            overflow: visible;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 40px auto;
+            font-size: 40px;
+        }
+
+        .pop-up {
+            position: absolute;
+        }
+
+        .source {
+            font-size: 15px;
+            color: grey;
+        }
+
+        .hover{
+            fill: yellow
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chart-container">
+        <h1 class="headline">
+            Children Living Under Poverty Across the United States in 2018
+        </h1>
+
+        <svg width="1050px" height="700px"></svg>
+
+        <div class="pop-up"></div>
+
+        <p class="source">
+            Source: U.S. Census Bureau
+        </p>
+    </div>
+</body>
+
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://unpkg.com/topojson@3"></script>
+
+<script>
+
+    Promise.all([d3.json('topojson.json')])
+        .then(ready)
+        .catch((err) => { console.log(err) });
+
+    function ready(res) {
+
+        let raw = res[0]
+
+        let county = topojson.feature(raw, raw.objects.county);
+        let state = topojson.feature(raw, raw.objects.cb_2018_us_state_20m);
+
+        let width = 1050;
+        let height = 700;
+
+        let svg = d3.select("body")
+            .select("svg")
+
+        let myProjection = d3.geoIdentity()
+            .fitSize([width, height], county)
+            .reflectY(true)
+
+        let path = d3.geoPath()
+            .projection(myProjection)
+
+         svg.append("g")
+            .selectAll("path")
+            .data(state.features)
+            .join("path")
+            .attr("d", path)
+            .style("fill", "#ecedee")
+            .style("stroke", "000")
+            .style("pointer-events", "none")
+
+        let states = svg
+            .append("path")
+            .attr("d", path)
+            .style("fill", "none")
+            .style("stroke", "#333")
+            .style("stroke-width", 1)
+            .style("pointer-events", "none")
+
+        let countyCircles = svg.append("g")
+            .selectAll(".circles")
+            .data(county.features.filter(d => d.geometry != null))
+            .join("circle")
+            .attr("class", d => { return "circles p-" + d.properties.Geo_NAME})
+            .attr("r", d => Math.sqrt(d.properties.pop_18_in_poverty / 400))
+            .attr("cx", d => { return path.centroid(d)[0] })
+            .attr("cy", d => { return path.centroid(d)[1] })
+            .style("fill", "#f2a83b")
+
+        let popup = d3.select(".pop-up")
+        let formatter = d3.format(",")
+
+        countyCircles.on("mouseover", (event, d) => {
+            popup
+                .style("border", "1px solid grey")
+                .style("border - radius", "1px")
+                .style("line - height", "1.2")
+                .style("width", "200px")
+                .style("background", "white")
+                .style("padding", "10px")
+                .style("left", (event.x + 10) + "px")
+                .style("top", (event.y - 15) + "px")
+                .style("opacity", .9)
+                .html("In " +
+                      "<b>" + d.properties.Geo_QName +
+                      ", " + "<u>" + formatter(d.properties.pop_18_in_poverty) +
+                      "</u>" + "</b>" + " children live under poverty.")
+        })
+
+        // This bit removes the pop up box when we are no longer hovered it. It returns everything to normal. 
+        countyCircles.on("mouseout", (event, d) => {
+            popup
+                .style("opacity", 0)
+
+        })
+
+
+}
+
+</script>
