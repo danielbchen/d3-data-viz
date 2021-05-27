@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- set styles on the top -->
+    <style>
+        .chart-container {
+            max-width: 1050px;
+            /* border: 2px solid red; */
+            margin: 0 auto;
+            /* auto centers the div */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        svg {
+            /* border: 2px solid purple; */
+            overflow: visible;
+        }
+
+        h1 {
+            margin: 0 auto;
+            font-size: 40px;
+            font-style: italic;
+            max-width: 1020;
+        }
+
+        .byline {
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 1015px;
+        }
+
+        .x .tick line {
+            stroke: rgba(0, 0, 0, .8);
+        }
+
+        .y .tick line {
+            stroke: rgba(0, 0, 0, .2);
+        }
+
+        .x .domain {
+            display: none;
+        }
+
+        .y .domain {
+            display: none;
+        }
+
+        .y .tick text {
+            font-size: 14px;
+            fill: #333;
+        }
+
+        .x .tick text {
+            font-size: 14px;
+            fill: #333;
+        }
+
+        .label {
+            font-size: 26px;
+            font-weight: 32px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .legend-label {
+            font-size: 15px;
+            font-weight: 32px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .axis-label {
+            font-weight: 30px;
+            text-transform: uppercase;
+        }
+
+        .year-label {
+            font-size: 28px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .note {
+            max-width: 880px;
+            margin: 0 auto;
+            color: grey;
+        }
+
+        .darken {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chart-container">
+        <h1 class="headline">
+            Obamacare, in Its First Big Test as Safety Net, Is Holding Up so Far
+        </h1>
+
+        <p class="byline">
+            Many Americans receive health insurance through their employer, so as the pandemic ravaged the economy,
+            Americans not only lost their jobs, but also their coverage. Consequently, large numbers of Americans
+            turned to the Affordable Care Act, fueling enrollment growth this past spring.
+        </p>
+
+        <svg width="1050px" height="575px">
+
+        </svg>
+
+        <p class="note">
+            Note: The income measure used here is <span class='darken'>disposable income</span>, which is defined as
+            market income
+            plus cash transfers from the government and noncash benefits like food stamps and public housing. It
+            excludes taxes,
+            out-of-pocket medical spending, insurance premiums and other expenses. There have been small changes in the
+            census
+            questionnaire between the two survey dates. Source: Current Population Survey, analysis by Matt Bruenig
+        </p>
+    </div>
+</body>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<script>
+
+    let width = 1030;
+    let height = 500;
+
+    let margin = { top: 60, right: 10, bottom: 10, left: 0 };
+
+    let svg = d3.select("body")
+        .select("svg")
+
+    d3.csv("healthcare-disposable-inc.csv").then(function (data) {
+
+        data.forEach(function (row) {
+            row.group = row['Percentile']
+            row.percentile = +row['Percentile']
+            row.medicaid = +row['Medicare+Medicaid']
+            row.chip = +row['CHIP']
+            row.military = +row['Military']
+            row.purchase = +row['Direct Purchase']
+            row.employer = +row['Employer']
+            row.other = +row['Other']
+            row.uninsured = +row['Uninsured']
+            row.subsidized = +row['Subsidized Exchange']
+
+        })
+
+        // Select columns (types of insurance) that will be displayed on area chart
+        let sel_cols = [
+            "Medicaid",
+            "Medicare",
+            "Medicare+Medicaid",
+            "Employer",
+            "Uninsured",
+            "Direct Purchase",
+            "Subsidized Exchange",
+            "CHIP",
+            "Military",
+            "Other"
+        ]
+
+        // Attach a color for each type of insurance
+        let sel_colors = [
+            "#f44336", // Medicaid
+            "#FF9800", // Medicare
+            "#FDD835", // Medicare+Medicaid
+            "#FFF8E1", // Employer
+            "#26A69A", // Uninsured
+            "#4DD0E1", // Direct Purchase
+            "#F06292", // Subsidized Exchange
+            "#5C6BC0", // CHIP
+            "#90A4AE", // Military
+            "#E0E0E0"  // Other
+        ]
+        
+        let state = 1;
+        let d2009 = data.filter(d => d.year == 2009)
+        let d2020 = data.filter(d => d.year == 2020)
+
+        // Define series for 2009 our starting year
+        let series = d3.stack()
+            .keys(sel_cols)(d2009)
+
+
+        // Define color function to map colors onto columns or types of insurance
+        let color = d3.scaleOrdinal()
+            .domain(sel_cols)
+            .range(sel_colors)
+
+        // Define x-axis
+        let x = d3.scaleLinear()
+            .domain([0, 100])
+            .range([margin.left, width])
+
+        // Define y-axis
+        let y = d3.scaleLinear()
+            .domain([0, 1])
+            .range([height - margin.bottom, margin.top])
+
+        // Function to create the areas on the chart
+        let area = d3.area()
+            .x(d => x(d.data.Percentile))
+            .y0(d => y(d[0]))
+            .y1(d => y(d[1]))
+
+        // X-axis settings
+        let xAxisSettings = d3.axisBottom(x)
+            .tickSize(6)
+            .tickPadding(6)
+            .ticks(10)
+            .tickValues([5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95])
+            .tickFormat(d3.format(".0f"))
+
+        // Add the x-axis to our chart
+        let xAxis = svg.append("g")
+            .attr("class", "x axis")
+            .call(xAxisSettings)
+            .call(g => g.selectAll(".domain").remove())
+            .attr("transform", `translate(0,${height - margin.bottom})`)
+
+        // Y-axis settings
+        let yAxisSettings = d3.axisLeft(y)
+            .tickValues([.2, .4, .6, .8])
+            .tickSize(6)
+            .tickPadding(6)
+            .tickFormat(d3.format(".0%"))
+
+        // Add the y-axis ticks to the chart
+        let yAxis = svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxisSettings)
+            .call(g => g.selectAll(".domain").remove())
+
+        // Add x-axis label
+        let xLabel = svg.append("text")
+            .attr("class", "axis-label")
+            .attr("x", width / 2)
+            .attr("y", height + 40)
+            .text("income percentile")
+            .attr("text-anchor", "middle")
+
+
+        // Add the data
+        let masses = svg.append("g")
+
+        masses
+            .selectAll("path")
+            .data(series)
+            .join("path")
+            .attr("class", d => { return d.key })
+            .attr("fill", d => color(d.key))
+            .attr("d", area)
+
+        // Create functions to make visual "dance"
+        function update() {
+            if (state == 0) {
+                state = 1
+                series = d3.stack().keys(sel_cols)(d2020);
+                year.text("2020")
+                dance(series)
+            } else {
+                series = d3.stack().keys(sel_cols)(d2009);
+                state = 0
+                year.text("2009")
+                dance(series)
+            }
+        }
+
+        function dance(dataset) {
+            masses
+                .selectAll("path")
+                .data(dataset)
+                .join("path")
+                .attr("class", d => { return d.key })
+                .attr("fill", d => color(d.key))
+                .transition()
+                .duration(600)
+                .ease(d3.easeLinear)
+                .attr("d", area)
+        }
+
+        // Update animation every 2500 milliseconds
+        var timer = d3.interval(update, 2500) 
+
+        // Add starting year indicator
+        let year = svg.append("text")
+            .attr("class", "year-label")
+            .text("2009")
+            .attr("x", 0)
+            .attr("y", 33)
+
+        // Manually adding a legend to the top 
+        let medsq = svg.append("rect")
+            .attr("x", 0)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#f44336")
+        let med = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 20)
+            .attr("y", 53)
+            .text("Medicaid")
+
+        let medcaresq = svg.append("rect")
+            .attr("x", 85)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#FF9800")
+        let medcare = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 105)
+            .attr("y", 53)
+            .text("Medicare")
+
+        let mandmsq = svg.append("rect")
+            .attr("x", 170)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#FDD835")
+        let mandm = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 190)
+            .attr("y", 53)
+            .text("Medicare and Medicaid")
+
+        let empsq = svg.append("rect")
+            .attr("x", 350)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#FFF8E1")
+        let emp = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 370)
+            .attr("y", 53)
+            .text("Employer")
+
+        let unsq = svg.append("rect")
+            .attr("x", 440)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#26A69A")
+        let un = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 460)
+            .attr("y", 53)
+            .text("Uninsured")
+
+        let dirpurchsq = svg.append("rect")
+            .attr("x", 535)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#4DD0E1")
+        let dipur = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 555)
+            .attr("y", 53)
+            .text("Direct Purchase")
+
+        let subexsq = svg.append("rect")
+            .attr("x", 665)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#F06292")
+        let subex = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 685)
+            .attr("y", 53)
+            .text("Subsidized Exchange")
+
+        let chipsq = svg.append("rect")
+            .attr("x", 835)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#5C6BC0")
+        let chip = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 855)
+            .attr("y", 53)
+            .text("CHIP")
+
+        let militarysq = svg.append("rect")
+            .attr("x", 895)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#90A4AE")
+        let military = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 915)
+            .attr("y", 53)
+            .text("Military")
+
+        let othersq = svg.append("rect")
+            .attr("x", 970)
+            .attr("y", 40)
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", "#E0E0E0")
+        let other = svg.append("text")
+            .attr("class", "legend-label")
+            .attr("x", 990)
+            .attr("y", 53)
+            .text("Other")
+
+    })
+
+</script>
