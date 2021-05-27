@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .chart-container {
+            max-width: 1050px;
+            /* border: 3px solid red; */
+            margin: 0 auto;
+            /* auto centers the div */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .bar {
+            fill: #f9642e;
+        }
+
+        .y.axis text {
+            font-size: 13px;
+            font-family: "arial";
+            fill: #5C5C5C;
+        }
+
+        .x.axis text {
+            font-size: 13px;
+            font-family: "arial";
+            fill: #5C5C5C;
+        }
+
+        .x .domain {
+            display: none;
+        }
+
+        svg {
+            /* border: 2px solid purple; */
+            overflow: visible;
+        }
+
+
+        h1 {
+            border: 15px solid white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chart-container">
+        <h1 class="headline">
+
+        </h1>
+        <svg width="1050px" height="500px">
+
+        </svg>
+
+    </div>
+
+
+</body>
+
+
+<!-- add your script blocks at the end -->
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<!-- we're using d3 version 6 (the latest version) for all out work -->
+
+<script>
+
+
+    console.log(d3)
+
+    let width = 900;
+    let height = 600;
+
+    let svg = d3.select("body").select("svg")
+
+    let margin = { top: 0, right: 0, bottom: 0, left: 0 };
+
+    // This is the grey rectangle highlighting the great recession
+    let grecession = svg.append("rect")
+        .attr("x", 353)
+        .attr("y", 50)
+        .attr("width", 67)
+        .attr("height", height - 50)
+        .style("fill", "#f0f0f0")
+
+    d3.csv("nat_edited.csv").then(function (data) {
+
+        data.forEach(function (row) {
+            row.end = new Date(row.end)
+            row.value = +row.value
+        })
+
+        console.log({ data })
+
+        let x = d3.scaleTime()
+            .domain(d3.extent(data.map(function (d) { return d.end })))
+            .range([margin.left, width - margin.right])
+
+        let y = d3.scaleLinear()
+            .domain([0, d3.max(data.map(d => d.value))])
+            .range([height - margin.bottom, margin.top])
+
+        let yAxisSettings = d3.axisLeft(y) //set axis to the left
+            .ticks(6)
+            .tickSize(-width - 13) //size of tick lines
+            .tickPadding(-920) //distance from tick labels to tick marks
+            .tickFormat(function (x) {
+                if (x == 3000000) {
+                    return 3 + ".0 million"
+                } else if (x == 2500000) {
+                    return 2.5 + " million"
+                } else if (x == 2000000) {
+                    return 2 + ".0 million"
+                } else if (x == 1500000) {
+                    return 1.5 + " million"
+                } else if (x == 1000000) {
+                    return 1 + ".0 million"
+                } else if (x == 500000) {
+                    return d3.format(",.2r")(500000)
+                } else {
+                    return ""
+                }
+            })
+
+
+        let xAxisSettings = d3.axisBottom(x)
+            .ticks(8)
+            .tickSize(5)
+            .tickPadding(5)
+            .tickSizeOuter(0)
+
+
+        let xAxisTicks = svg.append("g")
+            .attr("class", "x axis")
+            .call(xAxisSettings)
+            .attr("transform", `translate(0,${height - margin.bottom})`)
+            .call(g => g.select(".domain") // Remove x-axis line
+                .remove())
+
+
+        let yAxisTicks = svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxisSettings)
+            .attr("transform", `translate(${margin.left},0)`)
+            .call(g => g.selectAll(".tick:not(:first-of-type) line") // Change to dotted lines across plot
+                .attr("stroke-opacity", 0.5)
+                .attr("stroke-dasharray", "2,4"))
+            .call(g => g.select(".domain") // Remove the y-axis spine
+                .remove())
+            .style("text-anchor", "start")
+
+
+        let bars = svg.append("g")
+            .selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) { return x(d.end) })
+            .attr("y", function (d) { return y(d.value) })
+            .attr("height", function (d) { return height - y(d.value) })
+            .attr("width", function (d) {
+                if (d.value < 3000000) {
+                    return ((width - margin.right - margin.left) / data.length) * 1
+                } else {
+                    return 3.5
+                }
+            })
+
+        // Add circle to the end of the bars 
+        let points = svg.append("g")
+            .selectAll(".points")
+            .data(data)
+            .join("circle")
+            .attr("cx", function (d) { return x(d.end) + 1.6 })
+            .attr("cy", function (d) { return y(d.value) })
+            .attr("r", function (d) { return (d.value / 500000) })
+            .attr("fill", function (d) {
+                if (d.value > 3000000) {
+                    return "#f9642e"
+                } else {
+                    return "#f9642e00"
+                }
+            })
+            .style("stroke", function (d) {
+                if (d.value > 3000000) {
+                    return "white"
+                } else {
+                    return "#f9642e00"
+                }
+            })
+            .style("stroke-width", function (d) {
+                if (d.value > 3000000) {
+                    return 1.2
+                } else {
+                    return 0
+                }
+            })
+
+        // Average line
+        let line = svg.append("line")
+            .attr("x1", 0)
+            .attr("x2", width - 4)
+            .attr("y1", y(345000))
+            .attr("y2", y(345000))
+            .style("stroke", "#5C5C5C")
+            .style("stroke-width", ".6px")
+
+        // Mean text label 
+        svg.append("text")
+            .attr("x", width - 127)
+            .attr("y", 532)
+            .style("font-family", "arial")
+            .style("font-size", "11px")
+            .style("fill", "#5C5C5C")
+            .text("Weekly average: 345,000")
+
+        // Recession label
+        let rlabel = svg.append("text")
+            .attr("x", width - 628)
+            .attr("y", height - 100)
+            .style("font-family", "arial")
+            .style("font-size", "11px")
+            .style("fill", "#5C5C5C")
+            .text("2008 recession")
+
+        let capcontainer = svg.append("rect")
+            .attr("x", margin.left - 100)
+            .attr("y", 0)
+            .attr("width", 650)
+            .attr("height", 140)
+            .style("fill", "white")
+
+        // Headline first line
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 15)
+            .style("font-family", "georgia")
+            .style("font-size", "42px")
+            .style("fill", "black")
+            .text("More Than 3 Million")
+
+        // Headline second line
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 60)
+            .style("font-family", "georgia")
+            .style("font-size", "42px")
+            .style("fill", "black")
+            .text("Americans Lost Their Jobs")
+
+        // Headline third line
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 105)
+            .style("font-family", "georgia")
+            .style("font-size", "42px")
+            .style("fill", "black")
+            .text("Last Week. See Your State.")
+
+        let subcapcontainer = svg.append("rect")
+            .attr("x", margin.left - 350)
+            .attr("y", 130)
+            .attr("width", 800)
+            .attr("height", 110)
+            .style("fill", "white")
+
+        // Byline first line
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 140)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "black")
+            .text("Official statistics have revealed how severly coronavirus has")
+
+        // Byline second line
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 160)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "black")
+            .text("hurt the job market. But it may take several months before we")
+
+        // Byline third line
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 180)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "black")
+            .text("know whether this economic disaster will resemble a storm or")
+
+        // Byline fourth line
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 200)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "black")
+            .text("a long winter.")
+
+        // Orange circle text
+        svg.append("text")
+            .attr("x", width - 132)
+            .attr("y", 0)
+            .style("font-family", "arial")
+            .style("font-size", "28px")
+            .style("font-weight", "bold")
+            .style("fill", "#f9642e")
+            .text("3,283,000")
+
+        // Orange circle text
+        svg.append("text")
+            .attr("x", width - 136)
+            .attr("y", 20)
+            .style("font-family", "arial")
+            .style("font-size", "13.5px")
+            .style("fill", "#f9642e")
+            .text("claims filed last week")
+
+        svg.append("line")
+            .attr("x1", margin.left)
+            .attr("x2", width + 13)
+            .attr("y1", y(0))
+            .attr("y2", y(0))
+            .style("stroke", "#5C5C5C")
+            .style("stroke-width", "1.2")
+
+        svg.append("text")
+            .attr("x", width - 900)
+            .attr("y", 642)
+            .style("font-family", "arial")
+            .style("font-size", "11px")
+            .style("fill", "#999999")
+            .text("Note: Official figures are seasonally adjusted. Source: Department of Labor")
+
+    })
+
+</script>
