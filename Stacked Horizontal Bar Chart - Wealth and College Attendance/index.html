@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .chart-container {
+            max-width: 1050px;
+            /* border: 3px solid red; */
+            margin: 0 auto;
+            /* auto centers the div */
+            font-family: Arial;
+        }
+
+        svg {
+            /* border: 2px solid purple; */
+            overflow: visible;
+        }
+
+        h1 {
+            margin: 10px auto;
+        }
+
+        .x .domain {
+            display: none;
+        }
+
+        .y .domain {
+            display: none;
+        }
+
+        .y .tick text {
+            font-size: 14px;
+            fill: #333;
+        }
+
+        .x .tick text {
+            font-size: 14px;
+            fill: #333;
+        }
+
+        .source {
+            font-size: 14px;
+            color: rgb(94, 93, 93);
+        }
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="chart-container">
+        <h1 class="headline">
+            Four in 10 Students From the Top 0.1 Percent Attend an Ivy League or Elite University.
+        </h1>
+
+        <p>
+            The data below show where today's (in 2017) 25-year-olds went to college, grouped by their parents' income.
+            <br> More than 9 in ten students from the wealthiest families attend college. This stands in stark contrast to the 
+            roughly four in 10 students who attend college from the American families in the bottom fifth.
+        </p>
+
+
+        <svg width="1050px" height="500px">
+
+        </svg>
+    
+        <p class="source">
+            Source: "Mobility Report Cards: The Role of Colleges in Intergenerational Mobility", from The Equality of Opportunity Project
+            <br> Inspired by The New York Times, The Upshot, "Some Colleges Have More Students From the Top 1 Percent Than the
+            Bottom 60. Find Yours."
+        </p>
+        
+    </div>
+
+</body>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<script>
+
+    console.log(d3)
+    
+    let width = 1050;
+    let height = 500;
+    let margin = { top: 0, right: 0, bottom: 30, left: 0 }
+
+    let svg = d3.select("body")
+        .select("svg")
+
+    d3.csv("college-selection-by-income-group-01-13.csv").then(function (data) {
+
+        // Turn data types from strings to numeric
+        data.forEach(function (d) {
+            d.ForProfit = +d.ForProfit
+            d.HighlySelective = +d.HighlySelective
+            d.Incomplete = +d.Incomplete
+            d.IvyPlus = +d.IvyPlus
+            d.NotInCollege = +d.NotInCollege
+            d.NotSelective = +d.NotSelective
+            d.OtherElite = +d.OtherElite
+            d.Selective = +d.Selective
+            d.TwoYearOrLess = +d.TwoYearOrLess
+        })
+
+        // Define an array of keys - or each segment of the bar
+        let k = [
+            "IvyPlus",
+            "OtherElite",
+            "HighlySelective",
+            "Selective",
+            "NotSelective",
+            "TwoYearOrLess",
+            "ForProfit",
+            "NotInCollege",
+            "Incomplete" 
+        ]
+        
+        // Array containing HEX values for each type of higher-ed institution 
+        let colorscale = [
+            "#EA6238",
+            "#F08236",
+            "#F6A133",
+            "#FDC130",
+            "#D0D116",
+            "#9ECB93",
+            "#8FC4D7",
+            "#D1D1D1",
+            "#ECF0F1"
+        ]
+
+        // Stack data
+        let series = d3.stack()
+            .keys(k)(data)
+
+        // Match institutions to colors
+        let color = d3.scaleOrdinal()
+            .domain(k)
+            .range(colorscale)
+            .unknown("#ccc")
+        
+        // Define x to show percentages
+        let x = d3.scaleLinear()
+            .domain([0, 1])
+            .range([margin.left, width - margin.right])
+
+        // Define y to show income groups
+        let y = d3.scaleBand()
+            .domain(data.map(d => d["income_group"]).reverse())
+            .range([margin.top, height - margin.bottom])
+            .paddingInner(.15)
+        
+        // Define x-axis settings
+        let xAxisSettings = d3.axisBottom(x)
+            .ticks(5)
+            .tickSize(5)
+            .tickPadding(10)
+            .tickFormat(function (x) {
+                if(x == 0) {
+                    return ""
+                } else {
+                    return d3.format(".0%")(x)
+                }
+            })
+            .tickSizeOuter(0)
+
+        // Define y-axis settings
+        let yAxisSettings = d3.axisLeft(y)
+            .ticks(10)
+            .tickSize(5)
+            .tickPadding(5)
+            .tickFormat(function (x) {
+                if(x == "par_toppt1pc") {
+                    return "Top 0.1%"
+                } else if(x == "par_top1pc") {
+                    return "Top 1%" 
+                } else if(x == "par_top5pc") {
+                    return "Top 5%" 
+                } else if(x == "par_top10pc") {
+                    return "Top 10%"
+                } else if(x == "par_q5") {
+                    return "Top 20%"
+                } else if(x == "par_q4") {
+                    return "4th quintile"
+                } else if(x == "par_q3") {
+                    return "3rd quintile" 
+                } else if(x == "par_q2") {
+                    return "2nd quintile"
+                } else {
+                    return "Bottom 20%"
+                }
+            })
+
+        // Add x-axis
+        let xAxisTicks = svg.append("g")
+            .attr("class", "x axis")
+            .call(xAxisSettings)
+            .attr("transform", `translate(0,${height - margin.bottom})`)
+            .style("color", "#ccc")
+            .call(g => g.selectAll(".tick:first-of-type line") // Remove the tick mark corrresponding to 0%
+                .attr("stroke-width", "0"))
+            
+        // Add y-axis
+        let yAxisTicks = svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxisSettings)
+            .attr("transform", `translate(${margin.left},0)`)
+            .style("color", "#ccc")
+
+        // Add bars
+        let bars = svg.append("g")
+            .selectAll("g")
+            .data(series)
+            .enter().append("g")
+            .attr("fill", d => color(d.key))
+            .selectAll("rect")
+            .data(d => d)
+            .join("rect")
+            .attr("x", d => x(d[0]))
+            .attr("y", (d, i) => y(d.data.income_group))
+            .attr("width", d => x(d[1]) - x(d[0]))
+            .attr("height", y.bandwidth())
+
+        // Add bar text labels
+        svg.append("text")
+            .attr("x", 31)
+            .attr("y", 28)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("Ivy plus")
+        
+        svg.append("text")
+            .attr("x", 230)
+            .attr("y", 28)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("Elite")
+        
+        svg.append("text")
+            .attr("x", 433)
+            .attr("y", 28)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("Highly selective")
+
+        svg.append("text")
+            .attr("x", 710)
+            .attr("y", 28)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("Selective")
+    
+        svg.append("text")
+            .attr("x", 862)
+            .attr("y", 28)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("Not selective")
+    
+        svg.append("text")
+            .attr("x", 190)
+            .attr("y", 455)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("Two-year or less")
+
+        svg.append("text")
+            .attr("x", 341)
+            .attr("y", 455)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("For-profit")
+    
+        svg.append("text")
+            .attr("x", 599)
+            .attr("y", 455)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "white")
+            .text("Not in college by age 22")
+
+        svg.append("text")
+            .attr("x", 968)
+            .attr("y", 455)
+            .style("font-family", "arial")
+            .style("font-size", "16px")
+            .style("fill", "rgb(94, 93, 93)")
+            .text("Incomplete")
+
+    })
+    
+</script>
