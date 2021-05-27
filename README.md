@@ -15,4 +15,5 @@ This repository contains links to published D3 replications/original work comple
 
 ### Maps
 [Symbolic Child Poverty Map](https://danielbchen.github.io/d3-data-viz/Symbolic%20Map%20-%20Child%20Poverty/)
+
 [Choropleth 2020 U.S. Presidential Election](https://danielbchen.github.io/d3-data-viz/Choropleth%20-%202020%20Margin%20of%20Victory/)
