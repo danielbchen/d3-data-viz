@@ -1,0 +1,624 @@
+﻿President,Approval,Demographic,WeeksInOffice
+Truman,31,OppositeParty,1
+Truman,21,OppositeParty,2
+Truman,23,OppositeParty,3
+Truman,41,OppositeParty,4
+Truman,50,OppositeParty,5
+Truman,57,OppositeParty,6
+Truman,41,OppositeParty,7
+Truman,43,OppositeParty,8
+Truman,43,OppositeParty,9
+Truman,34,OppositeParty,10
+Truman,35,OppositeParty,11
+Truman,26,OppositeParty,12
+Truman,32,OppositeParty,13
+Truman,25,OppositeParty,14
+Truman,26,OppositeParty,15
+Truman,22,OppositeParty,16
+Truman,11,OppositeParty,17
+Truman,19,OppositeParty,18
+Truman,17,OppositeParty,19
+Truman,26,OppositeParty,20
+Truman,19,OppositeParty,21
+Truman,20,OppositeParty,22
+Truman,14,OppositeParty,23
+Truman,14,OppositeParty,24
+Truman,18,OppositeParty,25
+Truman,13,OppositeParty,26
+Truman,17,OppositeParty,27
+Truman,13,OppositeParty,28
+Truman,11,OppositeParty,29
+Truman,11,OppositeParty,30
+Truman,9,OppositeParty,31
+Truman,7,OppositeParty,32
+Truman,8,OppositeParty,33
+Truman,10,OppositeParty,34
+Truman,11,OppositeParty,35
+Truman,11,OppositeParty,36
+Truman,7,OppositeParty,37
+Truman,6,OppositeParty,38
+Truman,5,OppositeParty,39
+Truman,7,OppositeParty,40
+Truman,5,OppositeParty,41
+Truman,10,OppositeParty,42
+Truman,7,OppositeParty,43
+Truman,10,OppositeParty,44
+Truman,9,OppositeParty,45
+Truman,8,OppositeParty,46
+Truman,10,OppositeParty,47
+Truman,8,OppositeParty,48
+Truman,9,OppositeParty,49
+Johnson,78,OppositeParty,1
+Johnson,67,OppositeParty,2
+Johnson,73,OppositeParty,3
+Johnson,66,OppositeParty,4
+Johnson,63,OppositeParty,5
+Johnson,70,OppositeParty,6
+Johnson,67,OppositeParty,7
+Johnson,60,OppositeParty,8
+Johnson,67,OppositeParty,9
+Johnson,62,OppositeParty,10
+Johnson,60,OppositeParty,11
+Johnson,53,OppositeParty,12
+Johnson,61,OppositeParty,13
+Johnson,47,OppositeParty,14
+Johnson,51,OppositeParty,15
+Johnson,50,OppositeParty,16
+Johnson,48,OppositeParty,17
+Johnson,57,OppositeParty,18
+Johnson,50,OppositeParty,19
+Johnson,46,OppositeParty,20
+Johnson,53,OppositeParty,21
+Johnson,59,OppositeParty,22
+Johnson,50,OppositeParty,23
+Johnson,46,OppositeParty,24
+Johnson,45,OppositeParty,25
+Johnson,45,OppositeParty,26
+Johnson,45,OppositeParty,27
+Johnson,48,OppositeParty,28
+Johnson,47,OppositeParty,29
+Johnson,46,OppositeParty,30
+Johnson,41,OppositeParty,31
+Johnson,43,OppositeParty,32
+Johnson,44,OppositeParty,33
+Johnson,39,OppositeParty,34
+Johnson,37,OppositeParty,35
+Johnson,36,OppositeParty,36
+Johnson,35,OppositeParty,37
+Johnson,31,OppositeParty,38
+Johnson,34,OppositeParty,39
+Johnson,30,OppositeParty,40
+Johnson,38,OppositeParty,41
+Johnson,30,OppositeParty,42
+Johnson,27,OppositeParty,43
+Johnson,27,OppositeParty,44
+Johnson,24,OppositeParty,45
+Johnson,23,OppositeParty,46
+Johnson,28,OppositeParty,47
+Johnson,21,OppositeParty,48
+Johnson,26,OppositeParty,49
+Johnson,25,OppositeParty,50
+Carter,49,OppositeParty,1
+Carter,58,OppositeParty,2
+Carter,53,OppositeParty,3
+Carter,60,OppositeParty,4
+Carter,56,OppositeParty,5
+Carter,54,OppositeParty,6
+Carter,46,OppositeParty,7
+Carter,48,OppositeParty,8
+Carter,54,OppositeParty,9
+Carter,46,OppositeParty,10
+Carter,45,OppositeParty,11
+Carter,52,OppositeParty,12
+Carter,43,OppositeParty,13
+Carter,47,OppositeParty,14
+Carter,46,OppositeParty,15
+Carter,52,OppositeParty,16
+Carter,36,OppositeParty,17
+Carter,41,OppositeParty,18
+Carter,36,OppositeParty,19
+Carter,35,OppositeParty,20
+Carter,33,OppositeParty,21
+Carter,43,OppositeParty,22
+Carter,35,OppositeParty,23
+Carter,43,OppositeParty,24
+Carter,34,OppositeParty,25
+Carter,34,OppositeParty,26
+Carter,28,OppositeParty,27
+Carter,32,OppositeParty,28
+Carter,31,OppositeParty,29
+Carter,31,OppositeParty,30
+Carter,25,OppositeParty,31
+Carter,21,OppositeParty,32
+Carter,27,OppositeParty,33
+Carter,24,OppositeParty,34
+Carter,28,OppositeParty,35
+Carter,23,OppositeParty,36
+Carter,20,OppositeParty,37
+Carter,23,OppositeParty,38
+Carter,25,OppositeParty,39
+Carter,26,OppositeParty,40
+Carter,28,OppositeParty,41
+Carter,26,OppositeParty,42
+Carter,23,OppositeParty,43
+Carter,31,OppositeParty,44
+Carter,33,OppositeParty,45
+Carter,31,OppositeParty,46
+Carter,33,OppositeParty,47
+Carter,32,OppositeParty,48
+Carter,33,OppositeParty,49
+Carter,24,OppositeParty,50
+Trump,14,OppositeParty,1
+Trump,12,OppositeParty,2
+Trump,9,OppositeParty,3
+Trump,9,OppositeParty,4
+Trump,9,OppositeParty,5
+Trump,8,OppositeParty,6
+Trump,7,OppositeParty,7
+Trump,8,OppositeParty,8
+Trump,7,OppositeParty,9
+Trump,8,OppositeParty,10
+Trump,8,OppositeParty,11
+Trump,7,OppositeParty,12
+Trump,7,OppositeParty,13
+Trump,7,OppositeParty,14
+Trump,7,OppositeParty,15
+Trump,9,OppositeParty,16
+Trump,10,OppositeParty,17
+Trump,9,OppositeParty,18
+Trump,9,OppositeParty,19
+Trump,8,OppositeParty,20
+Trump,7,OppositeParty,21
+Trump,7,OppositeParty,22
+Trump,6,OppositeParty,23
+Trump,7,OppositeParty,24
+Trump,5,OppositeParty,25
+Trump,5,OppositeParty,26
+Trump,4,OppositeParty,27
+Trump,10,OppositeParty,28
+Trump,8,OppositeParty,29
+Trump,6,OppositeParty,30
+Trump,7,OppositeParty,31
+Trump,4,OppositeParty,32
+Trump,5,OppositeParty,33
+Trump,6,OppositeParty,34
+Trump,4,OppositeParty,35
+Trump,8,OppositeParty,36
+Trump,8,OppositeParty,37
+Trump,7,OppositeParty,38
+Trump,10,OppositeParty,39
+Trump,7,OppositeParty,40
+Trump,14,OppositeParty,41
+Trump,3,OppositeParty,42
+Trump,4,OppositeParty,43
+Trump,5,OppositeParty,44
+Trump,5,OppositeParty,45
+Trump,4,OppositeParty,46
+Trump,3,OppositeParty,47
+Trump,6,OppositeParty,48
+Trump,4,OppositeParty,49
+Eisenhower,60,OppositeParty,1
+Eisenhower,57,OppositeParty,2
+Eisenhower,64,OppositeParty,3
+Eisenhower,64,OppositeParty,4
+Eisenhower,64,OppositeParty,5
+Eisenhower,56,OppositeParty,6
+Eisenhower,63,OppositeParty,7
+Eisenhower,60,OppositeParty,8
+Eisenhower,48,OppositeParty,9
+Eisenhower,49,OppositeParty,10
+Eisenhower,44,OppositeParty,11
+Eisenhower,42,OppositeParty,12
+Eisenhower,54,OppositeParty,13
+Eisenhower,55,OppositeParty,14
+Eisenhower,54,OppositeParty,15
+Eisenhower,52,OppositeParty,16
+Eisenhower,52,OppositeParty,17
+Eisenhower,50,OppositeParty,18
+Eisenhower,42,OppositeParty,19
+Eisenhower,45,OppositeParty,20
+Eisenhower,46,OppositeParty,21
+Eisenhower,51,OppositeParty,22
+Eisenhower,61,OppositeParty,23
+Eisenhower,51,OppositeParty,24
+Eisenhower,46,OppositeParty,25
+Eisenhower,48,OppositeParty,26
+Eisenhower,45,OppositeParty,27
+Eisenhower,41,OppositeParty,28
+Eisenhower,54,OppositeParty,29
+Eisenhower,58,OppositeParty,30
+Eisenhower,53,OppositeParty,31
+Eisenhower,61,OppositeParty,32
+Eisenhower,54,OppositeParty,33
+Eisenhower,50,OppositeParty,34
+Eisenhower,58,OppositeParty,35
+Eisenhower,52,OppositeParty,36
+Eisenhower,54,OppositeParty,37
+Eisenhower,52,OppositeParty,38
+Eisenhower,57,OppositeParty,39
+Eisenhower,64,OppositeParty,40
+Eisenhower,54,OppositeParty,41
+Eisenhower,52,OppositeParty,42
+Eisenhower,67,OppositeParty,43
+Eisenhower,61,OppositeParty,44
+Eisenhower,63,OppositeParty,45
+Eisenhower,61,OppositeParty,46
+Eisenhower,52,OppositeParty,47
+Eisenhower,52,OppositeParty,48
+Eisenhower,56,OppositeParty,49
+Eisenhower,51,OppositeParty,50
+Obama,41,OppositeParty,1
+Obama,38,OppositeParty,2
+Obama,34,OppositeParty,3
+Obama,30,OppositeParty,4
+Obama,28,OppositeParty,5
+Obama,35,OppositeParty,6
+Obama,27,OppositeParty,7
+Obama,26,OppositeParty,8
+Obama,27,OppositeParty,9
+Obama,28,OppositeParty,10
+Obama,27,OppositeParty,11
+Obama,25,OppositeParty,12
+Obama,25,OppositeParty,13
+Obama,28,OppositeParty,14
+Obama,31,OppositeParty,15
+Obama,31,OppositeParty,16
+Obama,25,OppositeParty,17
+Obama,27,OppositeParty,18
+Obama,29,OppositeParty,19
+Obama,26,OppositeParty,20
+Obama,25,OppositeParty,21
+Obama,23,OppositeParty,22
+Obama,25,OppositeParty,23
+Obama,25,OppositeParty,24
+Obama,20,OppositeParty,25
+Obama,23,OppositeParty,26
+Obama,21,OppositeParty,27
+Obama,20,OppositeParty,28
+Obama,17,OppositeParty,29
+Obama,20,OppositeParty,30
+Obama,16,OppositeParty,31
+Obama,16,OppositeParty,32
+Obama,18,OppositeParty,33
+Obama,18,OppositeParty,34
+Obama,16,OppositeParty,35
+Obama,19,OppositeParty,36
+Obama,16,OppositeParty,37
+Obama,18,OppositeParty,38
+Obama,16,OppositeParty,39
+Obama,18,OppositeParty,40
+Obama,18,OppositeParty,41
+Obama,18,OppositeParty,42
+Obama,17,OppositeParty,43
+Obama,14,OppositeParty,44
+Obama,18,OppositeParty,45
+Obama,17,OppositeParty,46
+Obama,18,OppositeParty,47
+Obama,17,OppositeParty,48
+Obama,18,OppositeParty,49
+Obama,16,OppositeParty,50
+Kennedy,52,OppositeParty,1
+Kennedy,60,OppositeParty,2
+Kennedy,63,OppositeParty,3
+Kennedy,60,OppositeParty,4
+Kennedy,57,OppositeParty,5
+Kennedy,55,OppositeParty,6
+Kennedy,56,OppositeParty,7
+Kennedy,60,OppositeParty,8
+Kennedy,59,OppositeParty,9
+Kennedy,61,OppositeParty,10
+Kennedy,57,OppositeParty,11
+Kennedy,64,OppositeParty,12
+Kennedy,55,OppositeParty,13
+Kennedy,59,OppositeParty,14
+Kennedy,62,OppositeParty,15
+Kennedy,67,OppositeParty,16
+Kennedy,57,OppositeParty,17
+Kennedy,53,OppositeParty,18
+Kennedy,44,OppositeParty,19
+Kennedy,44,OppositeParty,20
+Kennedy,39,OppositeParty,21
+Kennedy,42,OppositeParty,22
+Kennedy,37,OppositeParty,23
+Kennedy,35,OppositeParty,24
+Kennedy,48,OppositeParty,25
+Kennedy,55,OppositeParty,26
+Kennedy,53,OppositeParty,27
+Kennedy,47,OppositeParty,28
+Kennedy,43,OppositeParty,29
+Kennedy,41,OppositeParty,30
+Kennedy,36,OppositeParty,31
+Kennedy,39,OppositeParty,32
+Kennedy,45,OppositeParty,33
+Kennedy,41,OppositeParty,34
+Kennedy,34,OppositeParty,35
+Kennedy,45,OppositeParty,36
+Kennedy,37,OppositeParty,37
+Kennedy,30,OppositeParty,38
+Kennedy,31,OppositeParty,39
+Nixon,45,OppositeParty,1
+Nixon,52,OppositeParty,2
+Nixon,55,OppositeParty,3
+Nixon,51,OppositeParty,4
+Nixon,45,OppositeParty,5
+Nixon,49,OppositeParty,6
+Nixon,56,OppositeParty,7
+Nixon,50,OppositeParty,8
+Nixon,52,OppositeParty,9
+Nixon,45,OppositeParty,10
+Nixon,51,OppositeParty,11
+Nixon,52,OppositeParty,12
+Nixon,47,OppositeParty,13
+Nixon,45,OppositeParty,14
+Nixon,43,OppositeParty,15
+Nixon,43,OppositeParty,16
+Nixon,54,OppositeParty,17
+Nixon,44,OppositeParty,18
+Nixon,47,OppositeParty,19
+Nixon,47,OppositeParty,20
+Nixon,45,OppositeParty,21
+Nixon,38,OppositeParty,22
+Nixon,38,OppositeParty,23
+Nixon,42,OppositeParty,24
+Nixon,42,OppositeParty,25
+Nixon,43,OppositeParty,26
+Nixon,40,OppositeParty,27
+Nixon,48,OppositeParty,28
+Nixon,40,OppositeParty,29
+Nixon,41,OppositeParty,30
+Nixon,44,OppositeParty,31
+Nixon,34,OppositeParty,32
+Nixon,44,OppositeParty,33
+Nixon,40,OppositeParty,34
+Nixon,34,OppositeParty,35
+Nixon,42,OppositeParty,36
+Nixon,36,OppositeParty,37
+Nixon,34,OppositeParty,38
+Nixon,34,OppositeParty,39
+Nixon,34,OppositeParty,40
+Nixon,31,OppositeParty,41
+Nixon,36,OppositeParty,42
+Nixon,34,OppositeParty,43
+Nixon,35,OppositeParty,44
+Nixon,35,OppositeParty,45
+Nixon,38,OppositeParty,46
+Nixon,35,OppositeParty,47
+Nixon,35,OppositeParty,48
+Nixon,32,OppositeParty,49
+Nixon,36,OppositeParty,50
+Ford,68,OppositeParty,1
+Ford,61,OppositeParty,2
+Ford,43,OppositeParty,3
+Ford,42,OppositeParty,4
+Ford,44,OppositeParty,5
+Ford,37,OppositeParty,6
+Ford,41,OppositeParty,7
+Ford,32,OppositeParty,8
+Ford,31,OppositeParty,9
+Ford,28,OppositeParty,10
+Ford,29,OppositeParty,11
+Ford,28,OppositeParty,12
+Ford,29,OppositeParty,13
+Ford,34,OppositeParty,14
+Ford,29,OppositeParty,15
+Ford,28,OppositeParty,16
+Ford,40,OppositeParty,17
+Ford,41,OppositeParty,18
+Ford,37,OppositeParty,19
+Ford,32,OppositeParty,20
+Ford,36,OppositeParty,21
+Ford,34,OppositeParty,22
+Ford,33,OppositeParty,23
+Ford,29,OppositeParty,24
+Ford,30,OppositeParty,25
+Ford,33,OppositeParty,26
+Ford,30,OppositeParty,27
+Ford,35,OppositeParty,28
+Ford,35,OppositeParty,29
+Ford,35,OppositeParty,30
+Ford,37,OppositeParty,31
+Ford,36,OppositeParty,32
+Ford,35,OppositeParty,33
+Ford,36,OppositeParty,34
+Ford,35,OppositeParty,35
+Ford,40,OppositeParty,36
+Reagan,38,OppositeParty,1
+Reagan,39,OppositeParty,2
+Reagan,41,OppositeParty,3
+Reagan,52,OppositeParty,4
+Reagan,46,OppositeParty,5
+Reagan,51,OppositeParty,6
+Reagan,44,OppositeParty,7
+Reagan,41,OppositeParty,8
+Reagan,41,OppositeParty,9
+Reagan,41,OppositeParty,10
+Reagan,38,OppositeParty,11
+Reagan,45,OppositeParty,12
+Reagan,42,OppositeParty,13
+Reagan,33,OppositeParty,14
+Reagan,36,OppositeParty,15
+Reagan,31,OppositeParty,16
+Reagan,30,OppositeParty,17
+Reagan,37,OppositeParty,18
+Reagan,29,OppositeParty,19
+Reagan,30,OppositeParty,20
+Reagan,29,OppositeParty,21
+Reagan,26,OppositeParty,22
+Reagan,26,OppositeParty,23
+Reagan,23,OppositeParty,24
+Reagan,20,OppositeParty,25
+Reagan,24,OppositeParty,26
+Reagan,22,OppositeParty,27
+Reagan,25,OppositeParty,28
+Reagan,24,OppositeParty,29
+Reagan,25,OppositeParty,30
+Reagan,21,OppositeParty,31
+Reagan,23,OppositeParty,32
+Reagan,19,OppositeParty,33
+Reagan,21,OppositeParty,34
+Reagan,19,OppositeParty,35
+Reagan,22,OppositeParty,36
+Reagan,22,OppositeParty,37
+Reagan,21,OppositeParty,38
+Reagan,18,OppositeParty,39
+Reagan,19,OppositeParty,40
+Reagan,19,OppositeParty,41
+Reagan,17,OppositeParty,42
+Reagan,23,OppositeParty,43
+Reagan,23,OppositeParty,44
+Reagan,25,OppositeParty,45
+Reagan,22,OppositeParty,46
+Reagan,26,OppositeParty,47
+Reagan,21,OppositeParty,48
+Reagan,28,OppositeParty,49
+Reagan,19,OppositeParty,50
+HW Bush,82,OppositeParty,1
+HW Bush,77,OppositeParty,2
+HW Bush,74,OppositeParty,3
+HW Bush,74,OppositeParty,4
+HW Bush,72,OppositeParty,5
+HW Bush,70,OppositeParty,6
+HW Bush,70,OppositeParty,7
+HW Bush,69,OppositeParty,8
+HW Bush,68,OppositeParty,9
+HW Bush,68,OppositeParty,10
+HW Bush,63,OppositeParty,11
+HW Bush,62,OppositeParty,12
+HW Bush,62,OppositeParty,13
+HW Bush,62,OppositeParty,14
+HW Bush,62,OppositeParty,15
+HW Bush,61,OppositeParty,16
+HW Bush,61,OppositeParty,17
+HW Bush,61,OppositeParty,18
+HW Bush,59,OppositeParty,19
+HW Bush,59,OppositeParty,20
+HW Bush,59,OppositeParty,21
+HW Bush,59,OppositeParty,22
+HW Bush,56,OppositeParty,23
+HW Bush,56,OppositeParty,24
+HW Bush,55,OppositeParty,25
+HW Bush,55,OppositeParty,26
+HW Bush,53,OppositeParty,27
+HW Bush,53,OppositeParty,28
+HW Bush,53,OppositeParty,29
+HW Bush,53,OppositeParty,30
+HW Bush,51,OppositeParty,31
+HW Bush,50,OppositeParty,32
+HW Bush,49,OppositeParty,33
+HW Bush,49,OppositeParty,34
+HW Bush,49,OppositeParty,35
+HW Bush,48,OppositeParty,36
+HW Bush,46,OppositeParty,37
+HW Bush,45,OppositeParty,38
+HW Bush,45,OppositeParty,39
+HW Bush,45,OppositeParty,40
+HW Bush,43,OppositeParty,41
+HW Bush,42,OppositeParty,42
+HW Bush,42,OppositeParty,43
+HW Bush,42,OppositeParty,44
+HW Bush,42,OppositeParty,45
+HW Bush,41,OppositeParty,46
+HW Bush,39,OppositeParty,47
+HW Bush,38,OppositeParty,48
+HW Bush,37,OppositeParty,49
+HW Bush,36,OppositeParty,50
+Clinton,33,OppositeParty,1
+Clinton,29,OppositeParty,2
+Clinton,24,OppositeParty,3
+Clinton,33,OppositeParty,4
+Clinton,27,OppositeParty,5
+Clinton,23,OppositeParty,6
+Clinton,25,OppositeParty,7
+Clinton,22,OppositeParty,8
+Clinton,20,OppositeParty,9
+Clinton,18,OppositeParty,10
+Clinton,15,OppositeParty,11
+Clinton,23,OppositeParty,12
+Clinton,19,OppositeParty,13
+Clinton,22,OppositeParty,14
+Clinton,14,OppositeParty,15
+Clinton,20,OppositeParty,16
+Clinton,16,OppositeParty,17
+Clinton,21,OppositeParty,18
+Clinton,29,OppositeParty,19
+Clinton,26,OppositeParty,20
+Clinton,21,OppositeParty,21
+Clinton,21,OppositeParty,22
+Clinton,19,OppositeParty,23
+Clinton,23,OppositeParty,24
+Clinton,23,OppositeParty,25
+Clinton,24,OppositeParty,26
+Clinton,29,OppositeParty,27
+Clinton,28,OppositeParty,28
+Clinton,25,OppositeParty,29
+Clinton,29,OppositeParty,30
+Clinton,28,OppositeParty,31
+Clinton,22,OppositeParty,32
+Clinton,19,OppositeParty,33
+Clinton,25,OppositeParty,34
+Clinton,26,OppositeParty,35
+Clinton,26,OppositeParty,36
+Clinton,24,OppositeParty,37
+Clinton,26,OppositeParty,38
+Clinton,17,OppositeParty,39
+Clinton,23,OppositeParty,40
+Clinton,22,OppositeParty,41
+Clinton,18,OppositeParty,42
+Clinton,15,OppositeParty,43
+Clinton,17,OppositeParty,44
+Clinton,13,OppositeParty,45
+Clinton,14,OppositeParty,46
+Clinton,13,OppositeParty,47
+Clinton,17,OppositeParty,48
+Clinton,16,OppositeParty,49
+Clinton,12,OppositeParty,50
+W Bush,32,OppositeParty,1
+W Bush,31,OppositeParty,2
+W Bush,31,OppositeParty,3
+W Bush,37,OppositeParty,4
+W Bush,33,OppositeParty,5
+W Bush,26,OppositeParty,6
+W Bush,37,OppositeParty,7
+W Bush,31,OppositeParty,8
+W Bush,30,OppositeParty,9
+W Bush,28,OppositeParty,10
+W Bush,26,OppositeParty,11
+W Bush,26,OppositeParty,12
+W Bush,30,OppositeParty,13
+W Bush,27,OppositeParty,14
+W Bush,31,OppositeParty,15
+W Bush,28,OppositeParty,16
+W Bush,31,OppositeParty,17
+W Bush,28,OppositeParty,18
+W Bush,35,OppositeParty,19
+W Bush,27,OppositeParty,20
+W Bush,27,OppositeParty,21
+W Bush,78,OppositeParty,22
+W Bush,84,OppositeParty,23
+W Bush,82,OppositeParty,24
+W Bush,80,OppositeParty,25
+W Bush,80,OppositeParty,26
+W Bush,78,OppositeParty,27
+W Bush,79,OppositeParty,28
+W Bush,77,OppositeParty,29
+W Bush,76,OppositeParty,30
+W Bush,78,OppositeParty,31
+W Bush,73,OppositeParty,32
+W Bush,69,OppositeParty,33
+W Bush,71,OppositeParty,34
+W Bush,67,OppositeParty,35
+W Bush,67,OppositeParty,36
+W Bush,63,OppositeParty,37
+W Bush,61,OppositeParty,38
+W Bush,65,OppositeParty,39
+W Bush,65,OppositeParty,40
+W Bush,65,OppositeParty,41
+W Bush,62,OppositeParty,42
+W Bush,54,OppositeParty,43
+W Bush,61,OppositeParty,44
+W Bush,60,OppositeParty,45
+W Bush,59,OppositeParty,46
+W Bush,59,OppositeParty,47
+W Bush,59,OppositeParty,48
+W Bush,49,OppositeParty,49
+W Bush,49,OppositeParty,50

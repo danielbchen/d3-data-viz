@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .chart-container {
+            max-width: 950px;
+            max-height: 10000px;
+            margin: 0 auto;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .line-chart {
+            margin: 0 auto;
+            max-width: 950px;
+        }
+
+        .text {
+            max-width: 950px;
+            max-height: 10000px;
+            margin: 0 auto;
+            margin-top: 50px;
+            font-size: 18px;
+        }
+
+        .y.axis text {
+            font-size: 13px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            fill: #5C5C5C;
+        }
+
+        .y .domain {
+            display: none;
+        }
+
+        .y .tick text {
+            font-size: 14px;
+            fill: #333;
+        }
+
+        .x .domain {
+            display: none;
+        }
+
+        .x.axis text {
+            font-size: 13px;
+            font-family: "arial";
+            fill: #333;
+        }
+
+        .y .tick line {
+            stroke: rgba(0, 0, 0, .3);
+        }
+
+        svg {
+            overflow: visible;
+        }
+
+        h1 {
+            border: 1px solid white;
+            font-size: 38px;
+        }
+
+        .byline {
+            font-size: 18px;
+            margin-bottom: 120px;
+            max-width: 900px;
+        }
+
+        .annotation {
+            font-size: 13px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .annotation-line-chart {
+            font-size: 15px;
+            text-anchor: end;
+            fill: black;
+        }
+
+        .ticks {
+            font-size: 14px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .president-label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .note {
+            font-size: 13px;
+            margin-top: 30px;
+            max-width: 700px;
+            margin-left: 100px;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="main">
+<div class="chart-container" id="truman">
+    <h1 class="headline">The Gap Between Democrats and Republicans' Views of the President Has Widened</h1>
+    <p class="byline">
+        Historically, the spread of presidental approval ratings has been relatively wide. Even among the 
+        opposing party, job ratings included both high and low marks. However, with partisanship becoming
+        more prominent, the distribution of job ratings among both parties has narrowed. Ratings are now 
+        concentrated around a certain value. Moreover, distributions sit on opposite ends of the scale.
+        Almost no one from the opposing party approves of how the president runs the country while nearly 
+        all members of the president's party say the same.  
+    </p>
+</div>
+<div class="chart-container" id="eisenhower"></div>
+<div class="chart-container" id="kennedy"></div>
+<div class="chart-container" id="johnson"></div>
+<div class="chart-container" id="nixon"></div>
+<div class="chart-container" id="ford"></div>
+<div class="chart-container" id="carter"></div>
+<div class="chart-container" id="reagan"></div>
+<div class="chart-container" id="hwbush"></div>
+<div class="chart-container" id="clinton"></div>
+<div class="chart-container" id="wbush"></div>
+<div class="chart-container" id="obama"></div>
+<div class="chart-container" id="trump"></div>
+</div>
+<div class="chart-container">
+    <p class="byline">
+        <br>
+        Intuitively, the purple masses always sit towards the right end of the scale as the 
+        President's base is more supportive than the party not in power. Even with Watergate looming over Nixon, 
+        his approval rating never dropped below 50% among Republicans - though it never reached the 90% level 
+        of support witnessed prior to impeachment hearings. 
+        <br><br>
+        Though the opposing party may never unequivocally back the president, it was possible for opposing members
+        to move past party politics and approve of the executive office's policy choices. At certain periods,
+        more than half of the opposition party approved of how Truman, Eisenhower, Kennedy, Johnson, Nixon, Ford,
+        Carter, Reagan, and both Bushes handled their job. George W. Bush is, notably, an anomly. His approval 
+        ratings benefited from what political scientists call the "rally 'round the flag effect" where political 
+        leaders experience a surge in short-term popularity following an international crisis or war because the
+        president is viewed as a symbol of national unity. Following the September 11 attacks on the World Trade 
+        Center in New York City, Bush's approval rating skyrocketed from 27% to 84% – an increase of 57 points – among
+        Democrats. His presidency ended with a 9% approval rating among Democrats.
+        <br><br>
+        With the exception of Bush's tenure, less than half of the opposing party approved of the president's job 
+        performance from the Clinton administration onwards. The white gaps seen between the lavender and mellow-yellow
+        colored masses for Clinton, Obama, and Trump illustrate the stark divide in how party members rate the 
+        commander in chief's conduct. The tight and tall masses for Trump are telling. Among Democrats, there is a high
+        chance that about 1-in-10 approve of his time in office while the opposite is true for Republicans. There is 
+        a lot of certainty that roughly 9-in-10 members of Trump's base gave his performance a nod. 
+        <br><br>
+        In conjunction with distributions, approval ratings can be visualized on a line plot. George H.W. Bush's 
+        ratings slope downward in a similar fashion to most presidents. As time passes, a smaller segment of voters
+        approve of the office. Among Democrats, just over 80% approved of H.W. Bush's job performance when his term 
+        started, but approval eroded to just under 40% as his term continued. The wide range of ratings explains the 
+        relatively flat and wide shaped masses seen above.
+        <br>
+    </p>
+</div>
+<div class="chart-container" id="linechart"></div>
+<div class="chart-container">
+    <p class="note">
+        Note: I manually scraped approval rating data from Gallup which was time consuming, so I limited the number 
+        of approval ratings for each president to 50 observations where possible. Kennedy, Ford, and Trump each had
+        fewer than 50 observations. Moreover, because Gallup conducted polls at different times for each president, 
+        the x-axis refers to successive tracking polls over the course of a presdient's time in office. 
+    </p>
+    <p class="byline">
+        <br>
+        Conversely, Donald Trump's approval has remained relatively flat throughout his one term. Few Democrats 
+        approved of how his administration handled the presidency and approval ratings only dwindled as time 
+        went on. The fall, however, was not nearly as large as the shift for H.W. Bush, explaining the relatively
+        tall and narrow distribution mentioned earlier. Trump's approval ratings consistently hovered around the 
+        10% mark or lower among Democrats.
+    </p>
+</div>
+
+</body>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<script>
+
+
+    // Define function to compute density
+    function kernelDensityEstimator(kernel, X) {
+        return function (V) {
+            return X.map(function (x) {
+                return [x, d3.mean(V, function (v) { return kernel(x - v); })];
+            });
+        };
+    }
+    function kernelEpanechnikov(k) {
+        return function (v) {
+            return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;
+        };
+    }
+
+    // Get data
+    d3.csv("approval.csv").then(function (raw) {
+
+        // Define chart boundaries for all charts
+        let width = 800,
+            height = 65,
+            margin = { top: 5, right: 0, bottom: 0, left: 0 };
+
+        function small_multiple(divID, pres, kernels) {
+
+            let data = raw.filter(d => d.President == pres)
+
+            // Create SVG
+            let svg = d3.select(divID)
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+            // Define x-axis
+            let x = d3.scaleLinear()
+                .domain([-10, 100])
+                .range([0, width])
+
+            // Hide "0" tick mark
+            let xAxisSettings = d3.axisBottom(x)
+                .ticks(0)
+                .tickSize(5)
+                .tickPadding(-100)
+                .tickSizeOuter(0)
+                .tickFormat(function (x) {
+                    if (x == 0) {
+                        return ""
+                    } else {
+                        return x + "%"
+                    }
+                })
+
+            let xAxisTicks = svg.append("g")
+                //.attr("class", "x axis")
+                .call(xAxisSettings)
+                .attr("transform", `translate(0,${height - margin.bottom})`)
+                .call(g => g.selectAll(".tick:first-of-type line") // Remove the tick mark corrresponding to 0%
+                    .attr("stroke-width", "0"))
+                //.call(g => g.select(".domain") // Remove x-axis line
+                //.remove())
+
+            // Define y-axis
+            let y = d3.scaleLinear()
+                .domain([0, .12])
+                .range([height, 0])
+
+            // Y-axis has no ticks and to ticklines
+            let yAxisSettings = d3.axisLeft(y) //set axis to the left
+                .ticks(0)
+                .tickSize(0)
+
+            let yAxisTicks = svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxisSettings)
+                .attr("transform", `translate(${margin.left},0)`)
+                .call(g => g.selectAll(".tick:last-of-type line") // Remove the tick mark corrresponding to 0%
+                    .attr("stroke-width", "0"))
+                .call(g => g.select(".domain") // Remove the y-axis spine
+                .remove())
+
+            // Compute kernel density estimation
+            var kde = kernelDensityEstimator(kernelEpanechnikov(kernels), x.ticks(60))
+            var ownParty = kde(data
+                .filter(function (d) { return d.Demographic === "OwnParty" })
+                .map(function (d) { return d.Approval; }))
+            var oppositeParty = kde(data
+                .filter(function (d) { return d.Demographic === "OppositeParty" })
+                .map(function (d) { return d.Approval; }))
+            var allAdults = kde(data
+                .filter(function (d) { return d.Demographic === "AllAdults" })
+                .map(function (d) { return d.Approval; }))
+
+            // Plot the density for the own party
+            svg.append("path")
+                .attr("class", "mypath")
+                .data([ownParty])
+                .attr("fill", "#b2abd2")
+                .attr("opacity", ".4")
+                .attr("stroke", "#b2abd2")
+                .attr("stroke-width", 0)
+                .attr("stroke-linejoin", "round")
+                .attr("d", d3.line()
+                    .curve(d3.curveBasis)
+                    .x(function (d) { return x(d[0]) })
+                    .y(function (d) { return y(d[1]) })
+                );
+
+            // Plot the density for opposite party
+            svg.append("path")
+                .attr("class", "mypath")
+                .data([oppositeParty])
+                .attr("fill", "#fdb863")
+                .attr("opacity", ".4")
+                .attr("stroke", "#fdb863")
+                .attr("stroke-width", 0)
+                .attr("stroke-linejoin", "round")
+                .attr("d", d3.line()
+                    .curve(d3.curveBasis)
+                    .x(function (d) { return x(d[0]); })
+                    .y(function (d) { return y(d[1]); })
+                );
+
+            // Plot the density for all adults
+            // svg.append("path")
+            //     .attr("class", "mypath")
+            //     .data([allAdults])
+            //     .attr("fill", "#000")
+            //     .attr("opacity", ".6")
+            //     .attr("stroke", "#000")
+            //     .attr("stroke-width", 1)
+            //     .attr("stroke-linejoin", "round")
+            //     .attr("d", d3.line()
+            //         .curve(d3.curveBasis)
+            //         .x(function (d) { return x(d[0]); })
+            //         .y(function (d) { return y(d[1]); })
+            //     );
+
+            if (pres == "Truman") {
+                // Add title for figure
+                svg.append("text")
+                    .attr("x", 0)
+                    .attr("y", -90)
+                    .style("font-size", "1.17em")
+                    .style("font-weight", "bold")
+                    .text("Distribution of Presidential Approval Ratings")
+                // Manually add legend
+                svg.append("circle")
+                    .attr("cx", 180)
+                    .attr("cy", -65)
+                    .attr("r", 8)
+                    .style("fill", "#fdb863") 
+                svg.append("text")
+                    .attr("x", 200)
+                    .attr("y", -65)
+                    .text("Voters from Opposing Party") 
+                    .style("font-size", "15px")
+                    .attr("alignment-baseline", "middle")
+                svg.append("circle")
+                    .attr("cx", 450)
+                    .attr("cy", -65)
+                    .attr("r", 8)
+                    .style("fill", "#b2abd2")
+                svg.append("text")
+                    .attr("x", 470)
+                    .attr("y", -65)
+                    .text("Voters from President's Own Party")
+                    .style("font-size", "15px")
+                    .attr("alignment-baseline", "middle")
+                // Add in annotations for x-axis
+                svg.append("text")
+                    .attr("x", 64)
+                    .attr("y", -30)
+                    .style("font-style", "italic")
+                    .style("font-size", "12px")
+                    .style("fill", "#666")
+                    .text("← Lower job approval")
+                svg.append("text")
+                    .attr("x", 695)
+                    .attr("y", -30)
+                    .style("font-style", "italic")
+                    .style("font-size", "12px")
+                    .style("fill", "#666")
+                    .text("Higher job approval →")
+                // 0% tick mark and label
+                svg.append("text")
+                    .attr("x", 63)
+                    .attr("y", -5)
+                    .attr("class", "ticks")
+                    .text("0%")
+                svg.append("line")
+                    .attr("x1", 72.5)
+                    .attr("x2", 72.5)
+                    .attr("y1", 0)
+                    .attr("y2", 8)
+                    .style("stroke", "#999")
+                    .style("stroke-width", "1.2")
+                // 25% tick mark and label
+                svg.append("text")
+                    .attr("x", 241)
+                    .attr("y", -5)
+                    .attr("class", "ticks")
+                    .text("25%")
+                svg.append("line")
+                    .attr("x1", 254.5)
+                    .attr("x2", 254.5)
+                    .attr("y1", 0)
+                    .attr("y2", 8)
+                    .style("stroke", "#999")
+                    .style("stroke-width", "1.2")
+                // 50% tick mark and label
+                svg.append("text")
+                    .attr("x", 423)
+                    .attr("y", -5)
+                    .attr("class", "ticks")
+                    .text("50%")
+                svg.append("line")
+                    .attr("x1", 436.5)
+                    .attr("x2", 436.5)
+                    .attr("y1", 0)
+                    .attr("y2", 8)
+                    .style("stroke", "#999")
+                    .style("stroke-width", "1.2")
+                // 75% tick mark and label
+                svg.append("text")
+                    .attr("x", 605)
+                    .attr("y", -5)
+                    .attr("class", "ticks")
+                    .text("75%")
+                svg.append("line")
+                    .attr("x1", 618.25)
+                    .attr("x2", 618.25)
+                    .attr("y1", 0)
+                    .attr("y2", 8)
+                    .style("stroke", "#999")
+                    .style("stroke-width", "1.2")
+                // 100% tick mark and label
+                svg.append("text")
+                    .attr("x", 785)
+                    .attr("y", -5)
+                    .attr("class", "ticks")
+                    .text("100%")
+                svg.append("line")
+                    .attr("x1", 800)
+                    .attr("x2", 800)
+                    .attr("y1", 0)
+                    .attr("y2", 8)
+                    .style("stroke", "#999")
+                    .style("stroke-width", "1.2")
+                // Add Truman label
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Truman (D)")                
+            } else if (pres == "Eisenhower") {
+                // Dashed horizontal line
+                svg.append("line")
+                    .attr("x1", 665)
+                    .attr("x2", 770)
+                    .attr("y1", 56)
+                    .attr("y2", 56)
+                    .style("stroke-dasharray", "3, 3")
+                    .style("stroke", "#555")
+                // Annotation for horizontal line
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 780)
+                    .attr("y", 25)
+                    .style("fill", "black")
+                    .text("The width of each mass tells us the range")
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 780)
+                    .attr("y", 40)
+                    .style("fill", "black")
+                    .text("of approval ratings. Wider masses")
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 780)
+                    .attr("y", 55)
+                    .style("fill", "black")
+                    .text("indicate more varied ratings.")
+                // Add Eisenhower label
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Eisenhower (R)")
+            } else if (pres == "Kennedy") {
+                // Dashed vertical line
+                svg.append("line")
+                    .attr("x1", 700)
+                    .attr("x2", 700)
+                    .attr("y1", 30)
+                    .attr("y2", 65)
+                    .style("stroke-dasharray", "3, 3")
+                    .style("stroke", "#555")
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Kennedy (D)")
+                // Annotation for vertical line
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 305)
+                    .attr("y", 20)
+                    .style("fill", "black")
+                    .text("The height of each mass tells us the chance of observing an approval rating.")
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 305)
+                    .attr("y", 35)
+                    .style("fill", "black")
+                    .text("Higher peaks indicate a greater chance of observing a rating.")
+            } else if (pres == "Johnson") {
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Johnson (D)")
+            } else if (pres == "Nixon") {
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Nixon (R)")
+            // Add annotation for Nixon 
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 645)
+                    .attr("y", height - 55)
+                    .style("fill", "black")
+                    .text("It's most likely that more than 75%")
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 690)
+                    .attr("y", height - 40)
+                    .style("fill", "black")
+                    .text("of Nixon base approved of")
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 710)
+                    .attr("y", height - 25)
+                    .style("fill", "black")
+                    .text("his job performance.")
+            } else if (pres == "Ford") {
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Ford (R)")
+            } else if (pres == "Carter") {
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 245)
+                    .attr("y", 35)
+                    .style("fill", "black")
+                    .text("Overlapping masses indicate shared approval ratings among both parties.")
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Carter (D)")           
+            } else if (pres == "Reagan") {
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Reagan (R)")
+            } else if (pres == "HW Bush") {
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 280)
+                    .attr("y", 30)
+                    .style("fill", "black")
+                    .text("At one point, 82% of Democrats approved of how George H.W. Bush handled his job.")
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("H.W. Bush (R)")
+            }  else if (pres == "Clinton") {
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Clinton (D)")
+            } else if (pres == "W Bush") {
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 210)
+                    .attr("y", 20)
+                    .style("fill", "black")
+                    .text("George W. Bush experienced boosts in short term approval from both parties following the")    
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 210)
+                    .attr("y", 35)
+                    .style("fill", "black")
+                    .text("9/11 attacks, explaining the masses with multiple peaks and high marks from Democrats.")
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("W. Bush (R)")            
+            } else if (pres == "Obama") {
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Obama (D)")
+            } else if (pres == "Trump") {
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 220)
+                    .attr("y", 35)
+                    .style("fill", "black")
+                    .text("For Trump, the gap between the highest approval rating among Democrats")
+                svg.append("text")
+                    .attr("class", "annotation")
+                    .attr("x", 220)
+                    .attr("y", 50)
+                    .style("fill", "black")
+                    .text("and lowest approval rating among Republicans is 65 points.")
+                svg.append("text")
+                    .attr("class", "president-label")
+                    .attr("x", 0)
+                    .attr("y", height - 5)
+                    .style("fill", "black")
+                    .text("Trump (R)")
+                // Add source
+                svg.append("text")
+                    .attr("x", 535)
+                    .attr("y", height + 20)
+                    .style("fill", "grey")
+                    .style("font-size", "13px")
+                    .text("Source: Gallup Presidental Job Aproval Center")
+            } 
+        
+        }
+
+        // Create small multiples for each president
+        small_multiple("#truman", "Truman", 8)
+        small_multiple("#eisenhower", "Eisenhower", 3)
+        small_multiple("#kennedy", "Kennedy", 6)
+        small_multiple("#johnson", "Johnson", 6)
+        small_multiple("#nixon", "Nixon", 6)
+        small_multiple("#ford", "Ford", 6)
+        small_multiple("#carter", "Carter", 6)
+        small_multiple("#reagan", "Reagan", 6)
+        small_multiple("#hwbush", "HW Bush", 3)
+        small_multiple("#clinton", "Clinton", 6)
+        small_multiple("#wbush", "W Bush", 1)
+        small_multiple("#obama", "Obama", 8)
+        small_multiple("#trump", "Trump", 6)
+
+    })
+
+    // Script for line chart
+    d3.csv("approval-oppo-only.csv").then(function (data) {
+
+        // Define chart boundaries
+        let width = 800,
+            height = 500,
+            margin = { top: -20, right: 10, bottom: 10, left: 30 };
+            
+        // Create SVG
+        let svgLineChart = d3.select("#linechart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+
+        // Turn weeks in office and approval rating into numeric data types
+        data.forEach(function (row) {
+            row.Approval = +row.Approval
+            row.WeeksInOffice = +row.WeeksInOffice
+        })
+
+        // Define x-axis function
+        let x = d3.scaleLinear()
+            .domain(d3.extent(data.map(function (d) { return d.WeeksInOffice })))
+            .range([margin.left, width - margin.right])
+
+        // Define y-axis function
+        let y = d3.scaleLinear()
+            .domain([0, d3.max(data.map(d => d.Approval))])
+            .range([height - margin.bottom, margin.top])
+
+        // Add in y-axis
+        let yAxisSettings = d3.axisLeft(y)
+            .ticks(3)
+            .tickSize(-width)
+            .tickPadding(40)
+            .tickFormat(function (x) {
+                if (x == 0) {
+                    return ""
+                } else {
+                    return x + "%"
+                }
+            })
+
+        let yAxisTicks = svgLineChart.append("g")
+            .attr("class", "y axis")
+            .call(yAxisSettings)
+            .attr("transform", `translate(${margin.left},0)`)
+            .call(g => g.selectAll(".tick:not(:first-of-type) line") // Change to dotted lines across plot
+                .attr("stroke-opacity", 1)
+                .attr("stroke-dasharray", "2,3"))
+            .call(g => g.select(".domain") // Remove the y-axis spine
+                .remove())
+            .style("text-anchor", "start")
+
+        // Add in x-axis
+        let xAxisSettings = d3.axisBottom(x)
+            .ticks(0)
+
+        let xAxisTicks = svgLineChart.append("g")
+            .attr("class", "x axis")
+            .call(xAxisSettings)
+            .attr("transform", `translate(0,${height - margin.bottom})`)
+
+        // Define line function
+        let line = d3.line()
+            .defined(d => !isNaN(d.Approval))
+            .x(function (d) { return x(d.WeeksInOffice) })
+            .y(function (d) { return y(d.Approval) })
+
+        // Plot lines grouped by president so lines remain distinct
+        let grouped_data = d3.group(data, d => d.President);
+
+        let line_path = svgLineChart.append("g")
+            .selectAll(".line")
+            .data(grouped_data)
+            .join("path")
+            .attr("class", function (d) { return "line" + d[0] })
+            .attr("d", function (d) { return line(d[1]) })
+            .style("fill", "none")
+            .style("stroke", d => {
+                if (d[0] == "HW Bush") {
+                    return "#67011E"
+                } else if (d[0] == "Trump") {
+                    return "#AB202F"
+                } else {
+                    return "#888"
+                }
+            })
+            .style("stroke-width", d => {
+                if (d[0] == "Trump" | d[0] == "HW Bush") {
+                    return "3px"
+                } else {
+                    return "1px"
+                }
+            })
+
+        // Add in HW Bush and Trump label
+        svgLineChart.append("text")
+            .attr("x", width + 33)
+            .attr("y", 270)
+            .style("text-anchor", "end")
+            .style("fill", "#67011E")
+            .text("H.W.")
+
+        svgLineChart.append("text")
+            .attr("x", width + 33)
+            .attr("y", 285)
+            .style("text-anchor", "end")
+            .style("fill", "#67011E")
+            .text("Bush")
+
+        svgLineChart.append("text")
+            .attr("x", width + 30)
+            .attr("y", height - 30)
+            .style("text-anchor", "end")
+            .style("fill", "#AB202F")
+            .text("Trump")
+
+        // Add in darkened 0 line
+        svgLineChart.append("line")
+            .attr("x1", margin.left)
+            .attr("x2", width + margin.left)
+            .attr("y1", height - margin.bottom)
+            .attr("y2", height - margin.bottom)
+            .style("stroke", "black")
+            .style("stroke-width", "1.2")
+
+        // Add in x-axis labels
+        svgLineChart.append("text")
+            .attr("x", width + margin.left - 20)
+            .attr("y", height - margin.bottom + 36)
+            .attr("class", "annotation-line-chart")
+            .style("font-size", "40px")
+            .text("→")
+
+        svgLineChart.append("text")
+            .attr("x", width + margin.left - 65)
+            .attr("y", height - margin.bottom + 30)
+            .attr("class", "annotation-line-chart")
+            .text("More time spent in office")
+
+        // Add in y-axis labels
+        svgLineChart.append("text")
+            .attr("x", -20)
+            .attr("y", margin.top + 50)
+            .attr("class", "annotation-line-chart")
+            .style("font-size", "40px")
+            .text("↑")
+
+        svgLineChart.append("text")
+            .attr("x", -45)
+            .attr("y", margin.top + 30)
+            .attr("class", "annotation-line-chart")
+            .text("Larger share")
+
+        svgLineChart.append("text")
+            .attr("x", -45)
+            .attr("y", margin.top + 45)
+            .attr("class", "annotation-line-chart")
+            .text("of voters")
+
+        svgLineChart.append("text")
+            .attr("x", -45)
+            .attr("y", margin.top + 60)
+            .attr("class", "annotation-line-chart")
+            .text("approving")
+
+        // Add chart title
+        svgLineChart.append("text")
+            .attr("x", -30)
+            .attr("y", -50)
+            .style("font-size", "1.17em")
+            .style("font-weight", "bold")
+            .text("Presidential Approval Ratings Among Members of Opposing Party")
+
+        // Add grey background so chart isn't floating in space
+        svgLineChart.append("rect")
+            .attr("x", margin.left - 50)
+            .attr("y", -30)
+            .attr("width", width + 65)
+            .attr("height", height + 30)
+            .style("fill", "rgba(0,0,0,.04)")
+        })
+
+</script>
