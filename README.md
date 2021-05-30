@@ -17,3 +17,6 @@ This repository contains links to published D3 replications/original work comple
 [Symbolic Child Poverty Map](https://danielbchen.github.io/d3-data-viz/Symbolic%20Map%20-%20Child%20Poverty/)
 
 [Choropleth 2020 U.S. Presidential Election](https://danielbchen.github.io/d3-data-viz/Choropleth%20-%202020%20Margin%20of%20Victory/)
+
+### Mixed Forms
+[Final Project - Partisanship and Presidential Approval Ratings](https://danielbchen.github.io/d3-data-viz/Mixed%20Forms%20-%20Final%20Project%20Presidential%20Approval%20Ratings/)
