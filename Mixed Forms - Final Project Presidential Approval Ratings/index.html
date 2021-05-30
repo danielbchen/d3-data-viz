@@ -99,18 +99,17 @@
     </style>
 </head>
 
+
 <body>
 
 <div id="main">
 <div class="chart-container" id="truman">
     <h1 class="headline">The Gap Between Democrats and Republicans' Views of the President Has Widened</h1>
     <p class="byline">
-        Historically, the spread of presidental approval ratings has been relatively wide. Even among the 
-        opposing party, job ratings included both high and low marks. However, with partisanship becoming
-        more prominent, the distribution of job ratings among both parties has narrowed. Ratings are now 
-        concentrated around a certain value. Moreover, distributions sit on opposite ends of the scale.
-        Almost no one from the opposing party approves of how the president runs the country while nearly 
-        all members of the president's party say the same.  
+        Historically, the spread of presidential job approval ratings has been relatively wide, which
+        includes high and low marks. The rise of partisanship has led to narrow spreads where almost no
+        one from the opposing party approves of how the presdient runs the country while nearly all
+        members of the president's party say the same.
     </p>
 </div>
 <div class="chart-container" id="eisenhower"></div>
@@ -129,33 +128,33 @@
 <div class="chart-container">
     <p class="byline">
         <br>
-        Intuitively, the purple masses always sit towards the right end of the scale as the 
-        President's base is more supportive than the party not in power. Even with Watergate looming over Nixon, 
-        his approval rating never dropped below 50% among Republicans - though it never reached the 90% level 
-        of support witnessed prior to impeachment hearings. 
+        Purple masses always sit at the right end of the scale because the president's base is more supportive
+        than the party not in power. Even if Nixon's approval never reached 90% again after Watergate, his
+        ratings also never dipped below 50% among Republicans.
         <br><br>
-        Though the opposing party may never unequivocally back the president, it was possible for opposing members
-        to move past party politics and approve of the executive office's policy choices. At certain periods,
-        more than half of the opposition party approved of how Truman, Eisenhower, Kennedy, Johnson, Nixon, Ford,
-        Carter, Reagan, and both Bushes handled their job. George W. Bush is, notably, an anomly. His approval 
-        ratings benefited from what political scientists call the "rally 'round the flag effect" where political 
-        leaders experience a surge in short-term popularity following an international crisis or war because the
-        president is viewed as a symbol of national unity. Following the September 11 attacks on the World Trade 
-        Center in New York City, Bush's approval rating skyrocketed from 27% to 84% – an increase of 57 points – among
-        Democrats. His presidency ended with a 9% approval rating among Democrats.
+        Though the opposing party may never unequivocally support the president, opposing members were once able to
+        put aside party politics to approve of the executive branch. At certain periods, more than half of the
+        opposition party approved of how Truman, Eisenhower, Kennedy, Johnson, Nixon, Ford, Carter, Reagan, and
+        both Bushes handled their jobs.
         <br><br>
-        With the exception of Bush's tenure, less than half of the opposing party approved of the president's job 
-        performance from the Clinton administration onwards. The white gaps seen between the lavender and mellow-yellow
-        colored masses for Clinton, Obama, and Trump illustrate the stark divide in how party members rate the 
+        George W. Bush is an outlier. His approval ratings benefited from what political scientists call the
+        "rally 'round the flag effect" where political leaders experience a surge in short-term popularity following
+        an international crisis or war because the president is viewed as a symbol of national unity. After the
+        September 11 attacks on the World Trade Center in New York City, Bush's approval rating skyrocketed
+        from 27% to 84% – an increase of 57 points – among Democrats. His presidency ended with a 9% approval
+        rating among Democrats.
+        <br><br>
+        With the exception of Bush, less than half of the opposing party approved of the president's job
+        performance from Clinton's administration onwards. The white gaps between the purple and yellow
+        colored masses for Clinton, Obama, and Trump illustrate the stark divide in how party members rate the
         commander in chief's conduct. The tight and tall masses for Trump are telling. Among Democrats, there is a high
-        chance that about 1-in-10 approve of his time in office while the opposite is true for Republicans. There is 
-        a lot of certainty that roughly 9-in-10 members of Trump's base gave his performance a nod. 
+        chance that about 10% approve of his time in office while the opposite is true for Republicans. There odds
+        are high that roughly 9-in-10 members of Trump's base gave his performance a nod.
         <br><br>
-        In conjunction with distributions, approval ratings can be visualized on a line plot. George H.W. Bush's 
-        ratings slope downward in a similar fashion to most presidents. As time passes, a smaller segment of voters
-        approve of the office. Among Democrats, just over 80% approved of H.W. Bush's job performance when his term 
-        started, but approval eroded to just under 40% as his term continued. The wide range of ratings explains the 
-        relatively flat and wide shaped masses seen above.
+        Approval ratings are usually tracked over time. George H.W. Bush's ratings slope downward in a similar fashion 
+        to most presidents. As time passes, approval of the office declines. Among Democrats, just over 80% approved 
+        of H.W. Bush's job performance when his term started, but approval eroded to under 40% as his term continued.
+        The wide range of ratings explains the relatively flat and wide shaped masses seen above.
         <br>
     </p>
 </div>
@@ -165,25 +164,25 @@
         Note: I manually scraped approval rating data from Gallup which was time consuming, so I limited the number 
         of approval ratings for each president to 50 observations where possible. Kennedy, Ford, and Trump each had
         fewer than 50 observations. Moreover, because Gallup conducted polls at different times for each president, 
-        the x-axis refers to successive tracking polls over the course of a presdient's time in office. 
+        the horizontal axis refers to successive tracking polls over the course of a president's time in office. 
     </p>
     <p class="byline">
         <br>
-        Conversely, Donald Trump's approval has remained relatively flat throughout his one term. Few Democrats 
-        approved of how his administration handled the presidency and approval ratings only dwindled as time 
-        went on. The fall, however, was not nearly as large as the shift for H.W. Bush, explaining the relatively
-        tall and narrow distribution mentioned earlier. Trump's approval ratings consistently hovered around the 
-        10% mark or lower among Democrats.
+        Donald Trump's approval remained relatively flat throughout his one term. Few Democrats 
+        approved of how his administration handled the presidency, and approval ratings only dwindled from there.
+        The fall, however, was not nearly as large as the drop for H.W. Bush, explaining the relatively
+        tall and narrow masses. Trump's approval ratings consistently hovered around the 10% mark or lower
+         among Democrats.
     </p>
 </div>
 
 </body>
 
+
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
+
 <script>
-
-
     // Define function to compute density
     function kernelDensityEstimator(kernel, X) {
         return function (V) {
@@ -786,7 +785,7 @@
             .style("stroke", "black")
             .style("stroke-width", "1.2")
 
-        // Add in x-axis labels
+        // Add in x-axis annotation
         svgLineChart.append("text")
             .attr("x", width + margin.left - 20)
             .attr("y", height - margin.bottom + 36)
@@ -800,7 +799,7 @@
             .attr("class", "annotation-line-chart")
             .text("More time spent in office")
 
-        // Add in y-axis labels
+        // Add in y-axis annotation
         svgLineChart.append("text")
             .attr("x", -20)
             .attr("y", margin.top + 50)
@@ -841,6 +840,5 @@
             .attr("width", width + 65)
             .attr("height", height + 30)
             .style("fill", "rgba(0,0,0,.04)")
-        })
-
+    })
 </script>
